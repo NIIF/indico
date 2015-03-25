@@ -576,6 +576,12 @@ $switch-inner-shadow: inset 0 0 0.4em $switch-shadow-color;
             margin-top: -1em;
         }
     }
+
+    &.no-block-padding {
+        .form-block {
+            padding-left: 0;
+        }
+    }
 }
 
 /* inspired by https://github.com/brianreavis/selectize.js/blob/master/examples/github.html */
