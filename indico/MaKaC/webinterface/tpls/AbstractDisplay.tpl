@@ -47,7 +47,7 @@
                             <ul>
                             % for pa in abstract.getPrimaryAuthorList():
                                 <li class="icon-user">
-                                  ${pa.getStraightFullName()} (${pa.getAffiliation()})
+                                  ${pa.getStraightFullName()} (${pa.getAffiliation()}) (${pa.getEmail()}) (${pa.getAddress()}) (${pa.getTelephone()})
                                 </li>
                             % endfor
                             </ul>
@@ -59,7 +59,7 @@
                             <ul>
                             % for ca in abstract.getCoAuthorList():
                                 <li class="icon-user">
-                                  ${ca.getStraightFullName()} (${ca.getAffiliation()})
+                                  ${ca.getStraightFullName()} (${ca.getAffiliation()}) (${ca.getEmail()}) (${ca.getAddress()}) (${ca.getTelephone()})
                                 </li>
                             % endfor
                             </ul>

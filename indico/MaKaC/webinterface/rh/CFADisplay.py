@@ -128,13 +128,13 @@ class _AbstractSubmissionNotification:
     def getMsg(self):
         primary_authors = []
         for auth in self._abstract.getPrimaryAuthorList():
-            primary_authors.append("""%s (%s) <%s>""" % (auth.getFullName(), auth.getAffiliation(), auth.getEmail()))
+            primary_authors.append("""%s (%s) (%s) (%s) <%s>""" % (auth.getFullName(), auth.getAffiliation(), auth.getAddress(), auth.getTelephone(), auth.getEmail()))
         co_authors = []
         for auth in self._abstract.getCoAuthorList():
             email = ""
             if auth.getEmail() != "":
                 email = " <%s>" % auth.getEmail()
-            co_authors.append("""%s (%s)%s""" % (auth.getFullName(), auth.getAffiliation(), email))
+            co_authors.append("""%s (%s) (%s) (%s) %s""" % (auth.getFullName(), auth.getAffiliation(), auth.getAddress(), auth.getTelephone(), email))
         speakers = []
         for spk in self._abstract.getSpeakerList():
             speakers.append(spk.getFullName())
