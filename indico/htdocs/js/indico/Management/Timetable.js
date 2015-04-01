@@ -1341,12 +1341,12 @@ type("MoveEntryDialog", ["ExclusivePopupWithButtons"],
         */
             _titleTemplate: function(text) {
                 if (text == 'all') {
-                    return 'All days';
+                    return $T('All days');
                 }
 
                 var nDate = Util.parseJSDateTime(text, IndicoDateTimeFormats.Ordinal);
 
-                return Indico.Data.WeekDays[nDate.getDay()].substring(0,3) + ' ' + nDate.getDate() + '/' + (nDate.getMonth() + 1);
+                return $T(Indico.Data.WeekDays[nDate.getDay()].substring(0,3)) + ' ' + (nDate.getMonth() + 1) + '/' + nDate.getDate();
             },
 
             postDraw: function(){

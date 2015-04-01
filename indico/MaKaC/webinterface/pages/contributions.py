@@ -122,7 +122,7 @@ class WContributionDisplayBase(WICalExportBase):
                                               (self._contrib.getConference().getId(), self._contrib.getId())))
 
         vars["getAuthorURL"] = lambda auth: self._getAuthorURL(auth)
-        vars["formatDate"] = lambda date: format_date(date, "d MMM yyyy")
+        vars["formatDate"] = lambda date: format_date(date, "yyyy MMM d")
         vars["formatTime"] = lambda time: format_time(time, format="short", timezone=timezone(DisplayTZ(self._aw, self._contrib.getConference()).getDisplayTZ()))
         vars["accessWrapper"] = self._aw
         statusReviewing = self._getStatusReviewing()

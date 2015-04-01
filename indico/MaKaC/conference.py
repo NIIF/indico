@@ -1783,7 +1783,7 @@ class ConferenceParticipation(Persistent, Fossilizable):
         return res
 
     def getDirectFullName( self ):
-        res = "%s %s"%( self.getFirstName(), self.getFamilyName() )
+        res = "%s %s"%( self.getFamilyName(), self.getFirstName() )
         res=res.strip()
         if self.getTitle() != "":
             res = "%s %s"%( self.getTitle(), res )
@@ -3165,11 +3165,11 @@ class Conference(CommonObjectBase, Locatable):
         dictionary = {}
         for session in self.getSessionList() :
             for convener in session.getConvenerList() :
-                key = convener.getEmail()+" "+convener.getFirstName().lower()+" "+convener.getFamilyName().lower()
+                key = convener.getEmail()+" "+convener.getFamilyName().lower()+" "+convener.getFirstName().lower()
                 dictionary.setdefault(key, set()).add(convener)
             for slot in session.getSlotList():
                 for convener in slot.getConvenerList() :
-                    key = convener.getEmail()+" "+convener.getFirstName().lower()+" "+convener.getFamilyName().lower()
+                    key = convener.getEmail()+" "+convener.getFamilyName().lower()+" "+convener.getFirstName().lower()
                     dictionary.setdefault(key, set()).add(convener)
 
         return dictionary
@@ -7398,7 +7398,7 @@ class ContributionParticipation(Persistent, Fossilizable):
 
     def getDirectFullNameNoTitle(self, upper=True):
         familyName = safe_upper(self.getFamilyName()) if upper else self.getFamilyName()
-        return "{0} {1}".format(self.getFirstName(), familyName).strip()
+        return "{0} {1}".format(familyName, self.getFirstName()).strip()
 
     def getFullName(self):
         res = self.getFullNameNoTitle()

@@ -21,7 +21,7 @@
             <%include file="ContributionICalExport.tpl" args="item=Contribution"/>
         </div>
         <h1 class="page-title">
-            ${"Contribution"}
+	    ${_("Contribution")}
             % if Contribution.getType() is not None:
                 <span class="type">${Contribution.getType().getName()}</span>
             % endif
@@ -106,7 +106,7 @@
 
                                         <li>
                                             <a href="${urlHandlers.UHMaterialDisplay.getURL(material)}" class="titleWithLink" title="${material.getDescription()}">
-                                                <h3>${material.getTitle()}</h3>
+                                                <h3>${_(material.getTitle())}</h3>
                                             </a>
                                             <ul>
                                             % for resource in material.getResourceList():
@@ -157,9 +157,14 @@
 </div>
 <script type="text/javascript">
     $("#manageMaterial").click(function(){
+        var material_types = ${jsonEncode(Contribution.getMaterialRegistry().getMaterialList(Contribution.getConference()))};
+        for (var i = 0; i < material_types.length; i++) {
+            material_types[i][1] = $T(material_types[i][1]);
+        }
+
         IndicoUI.Dialogs.Material.editor('${Contribution.getOwner().getId()}', '${Contribution.getConference().getId()}',
             '${Contribution.getSession().getId() if Contribution.getSession() else ""}','${Contribution.getId()}','',
-                ${jsonEncode(Contribution.getAccessController().isProtected())}, ${jsonEncode(Contribution.getMaterialRegistry().getMaterialList(Contribution.getConference()))}, ${'Indico.Urls.UploadAction.contribution'}, true);
+                ${jsonEncode(Contribution.getAccessController().isProtected())}, material_types, ${'Indico.Urls.UploadAction.contribution'}, true);
      });
 </script>
 <%block name="scripts">

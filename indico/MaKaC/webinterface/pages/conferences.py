@@ -433,13 +433,13 @@ class WConfDisplayFrame(wcomponents.WTemplated):
         adjusted_eDate = self._conf.getAdjustedScreenEndDate(tz)
 
         vars["timezone"] = tz
-        vars["confDateInterval"] = i18nformat("""_("from") %s _("to") %s""") % (
+        vars["confDateInterval"] = i18nformat("""%s - %s""") % (
             format_date(adjusted_sDate, format='long'), format_date(adjusted_eDate, format='long'))
         if adjusted_sDate.strftime("%d%B%Y") == \
                 adjusted_eDate.strftime("%d%B%Y"):
             vars["confDateInterval"] = format_date(adjusted_sDate, format='long')
         elif adjusted_sDate.strftime("%B%Y") == adjusted_eDate.strftime("%B%Y"):
-            vars["confDateInterval"] = "%s-%s %s"%(adjusted_sDate.day, adjusted_eDate.day, format_date(adjusted_sDate, format='MMMM yyyy'))
+            vars["confDateInterval"] = "%s %s-%s."%(format_date(adjusted_sDate, format='yyyy. MMMM'), adjusted_sDate.day, adjusted_eDate.day)
         vars["confLocation"] = ""
         if self._conf.getLocationList():
             vars["confLocation"] =  self._conf.getLocationList()[0].getName()
@@ -5241,10 +5241,12 @@ class WConfMyStuffMySessions(WConfDisplayBodyBase):
             res.append("""
                 <tr class="infoTR">
                     <td class="infoTD" width="100%%">%s</td>
-                    <td nowrap class="infoTD"><a href=%s>Edit</a><span class="horizontalSeparator">|</span><a href=%s>View</a></td>
+                    <td nowrap class="infoTD"><a href=%s>%s</a><span class="horizontalSeparator">|</span><a href=%s>%s</a></td>
                 </tr>""" % (self.htmlText(s.getTitle()),
                             quoteattr(str(modURL)),
-                            quoteattr(str(dispURL))))
+                            _("Edit"),
+                            quoteattr(str(dispURL)),
+                            _("View")))
         return """
             <table class="infoTable" cellspacing="0" width="100%%">
                 <tr>
@@ -5329,9 +5331,10 @@ class WConfMyStuffMyTracks(WConfDisplayBodyBase):
             res.append("""
                 <tr class="infoTR">
                     <td class="infoTD" width="100%%">%s</td>
-                    <td nowrap class="infoTD"><a href=%s>Edit</a></td>
+                    <td nowrap class="infoTD"><a href=%s>%s</a></td>
                 </tr>""" % (self.htmlText(t.getTitle()),
-                            quoteattr(str(modURL))))
+                            quoteattr(str(modURL)),
+                            _("Edit")))
         return """
             <table class="infoTable" cellspacing="0" width="100%%">
                 <tr>
@@ -5587,7 +5590,7 @@ class WConfStaticDetails(WConfDisplayBodyBase):
         sdate, edate = self._conf.getAdjustedStartDate(), self._conf.getAdjustedEndDate()
         fsdate, fedate = format_date(sDate, format='long'), format_date(eDate, format='long')
         fstime, fetime = sdate.strftime("%H:%M"), edate.strftime("%H:%M")
-        wvars["dateInterval"] = i18nformat("""_("from") %s %s _("to") %s %s""") % (fsdate, fstime,
+        wvars["dateInterval"] = i18nformat("""%s %s - %s %s""") % (fsdate, fstime,
                                                                                    fedate, fetime)
         if sdate.strftime("%d%B%Y") == edate.strftime("%d%B%Y"):
             timeInterval = fstime
@@ -5712,7 +5715,7 @@ class WConfStaticDisplayFrame(wcomponents.WTemplated):
         tz = DisplayTZ(self._aw,self._conf).getDisplayTZ()
         adjusted_sDate = self._conf.getAdjustedStartDate(tz)
         adjusted_eDate = self._conf.getAdjustedEndDate(tz)
-        vars["confDateInterval"] = i18nformat("""_("from") %s _("to") %s""")%(format_date(adjusted_sDate, format='long'), format_date(adjusted_eDate, format='long'))
+        vars["confDateInterval"] = i18nformat("""%s - %s""")%(format_date(adjusted_sDate, format='long'), format_date(adjusted_eDate, format='long'))
         if adjusted_sDate.strftime("%d%B%Y") == \
                 adjusted_eDate.strftime("%d%B%Y"):
            vars["confDateInterval"] = format_date(adjusted_sDate, format='long')
@@ -6940,7 +6943,7 @@ class WSessionStaticDisplay(wcomponents.WTemplated):
         if sDate.strftime("%d%b%Y")==eDate.strftime("%d%b%Y"):
             vars["dateInterval"]=format_datetime(sDate, format='EEEE d MMMM yyyy H:mm')
         else:
-            vars["dateInterval"]=i18nformat("""_("from") %s _("to") %s""")%(
+            vars["dateInterval"]=i18nformat("""%s - %s""")%(
                 format_datetime(sDate, format='EEEE d MMMM yyyy H:mm'),
                 format_datetime(eDate, format='EEEE d MMMM yyyy H:mm'))
         #################################

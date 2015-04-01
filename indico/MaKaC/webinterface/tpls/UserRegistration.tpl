@@ -104,7 +104,7 @@ ${ locator }
   <td colspan="2" bgcolor="black"></td>
 </tr>
 <tr>
-  <td align="right"><font color="gray"><font color="red">* </font> ${ _("Login")}</font></td>
+  <td align="right"><font color="gray"><font color="red">* </font> ${ _("Login name")}</font></td>
   <td align="left"><input type="text" name="login" value=${ login } size="25"></td>
 </tr>
 <tr>

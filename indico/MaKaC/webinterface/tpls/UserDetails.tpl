@@ -77,7 +77,7 @@
             <span class="dataCaptionFormat">${ _("Account status")}</span>
         </td>
         <td bgcolor="white" nowrap valign="top" class="blacktext">
-            ${ user.getStatus() }
+            ${ _(user.getStatus()) }
             % if currentUserIsAdmin:
                 <form action="${activeURL if not user.isActivated() else disableURL}" method="POST" style="display: inline;">
                     <input type="submit" class="btn" value="${_('activate the account') if not user.isActivated() else _('disable the account')}">
@@ -184,14 +184,14 @@ var beforeEdit = function(field, widget) {
             .format(authenticatorName),
         function(confirmed){
             if(confirmed || _.contains(unlockedFields, field)){
-                widget.modeChooser.set("edit");
+		 widget.modeChooser.set($T("edit"));
         }
     });
 
     if (!_.contains(unlockedFields, field)) {
         syncPopup.open();
     } else {
-        widget.modeChooser.set("edit");
+	 widget.modeChooser.set($T("edit"));
     }
 
     return false;

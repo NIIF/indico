@@ -168,11 +168,11 @@
     var createMultiselect = function(place, kind){
         place.multiselect({
             selectedText: function(numChecked, numTotal, checkedItems){
-                return numChecked + " "+ kind + " selected";
+		return numChecked + " "+ kind + $T(" selected");
              },
-            noneSelectedText: "Select " + kind,
-            checkAllText: "All",
-            uncheckAllText: "None",
+	    noneSelectedText: $T("Select ") + kind,
+            checkAllText: $T("All"),
+	    uncheckAllText: $T("None"),
             checkAll: function(e){verifyFiltersAndReset();},
             uncheckAll: function(e){verifyFiltersAndReset();},
             click: function(e){verifyFiltersAndReset();},
@@ -181,20 +181,20 @@
     };
 
     $(function(){
-        createMultiselect($("#contribTypeSelector"), "contribution types");
+        createMultiselect($("#contribTypeSelector"), $T("contribution types"));
 
         <%block name="sessionSelectorName">
-            createMultiselect($("#sessionSelector"), "sessions");
+            createMultiselect($("#sessionSelector"), $T("sessions"));
         </%block>
 
-        createMultiselect($("#trackSelector"), "tracks");
+        createMultiselect($("#trackSelector"), $T("tracks"));
 
         $("#showFilters").click(function(){
             if($("#filterContent").is(':hidden')){
-                $("#showFilters").text('Hide filters');
+                $("#showFilters").text($T('Hide filters'));
                 $("#filterContent").show("blind");
             } else {
-                $("#showFilters").text('More filters');
+                $("#showFilters").text($T('More filters'));
                 $("#filterContent").hide("blind");
             }
         });
@@ -260,7 +260,7 @@
         });
 
         if(verifyFilters()){
-            $("#showFilters").text('Hide filters');
+            $("#showFilters").text($T('Hide filters'));
             $("#filterContent").show("blind");
             $("#resetFiltersContainer").css("display", "inline");
         }

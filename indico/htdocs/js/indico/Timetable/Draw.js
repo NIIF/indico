@@ -718,13 +718,13 @@ type("TimetableBlockPopup", ["BalloonPopup", "TimetableBlockBase"], {
         var roomLocationInfo = Html.div({});
 
         if (this.eventData.room) {
-            roomLocationInfo.append(Html.div('roomPopupTitle', 'Room: '));
+            roomLocationInfo.append(Html.div('roomPopupTitle', $T('Room: ')));
             roomLocationInfo.append(this.eventData.room);
             roomLocationInfo.append(Html.br());
         }
 
         if (this.eventData.location) {
-            roomLocationInfo.append(Html.div('roomPopupTitle', 'Location: '));
+            roomLocationInfo.append(Html.div('roomPopupTitle', $T('Location: ')));
             roomLocationInfo.append(this.eventData.location);
             roomLocationInfo.append(Html.br());
         }
@@ -769,7 +769,7 @@ type("TimetableBlockPopup", ["BalloonPopup", "TimetableBlockBase"], {
                 }
             });
             if (i > 0) {
-                infoContentDiv.append(Html.strong({style:{fontStyle: 'normal'}}, 'Presenter(s): '));
+                infoContentDiv.append(Html.strong({style:{fontStyle: 'normal'}}, $T('Presenter(s): ')));
                 infoContentDiv.append(speakers);
             }
         }
@@ -825,7 +825,7 @@ type("TimetableBlockPopup", ["BalloonPopup", "TimetableBlockBase"], {
 
         var bar = Html.div({});
         var url = self.eventData.url;
-        var viewLink = Html.a({'href': url}, "View details");
+        var viewLink = Html.a({'href': url}, $T("View details"));
         bar.append(viewLink);
 
         if (self.eventData.material && self.eventData.material.length > 0) {
@@ -841,7 +841,7 @@ type("TimetableBlockPopup", ["BalloonPopup", "TimetableBlockBase"], {
         }
 
 
-        var exportLink = Html.a('dropDownMenu fakeLink', "Export");
+        var exportLink = Html.a('dropDownMenu fakeLink', $T("Export"));
         exportLink.observeClick(function () {
             var menuItems = {};
             var urlParams;
@@ -893,7 +893,7 @@ type("TimetableBlockPopup", ["BalloonPopup", "TimetableBlockBase"], {
             return null;
         }
 
-        var detailsLink = Html.div({style: {marginTop: pixels(5), marginLeft: pixels(5)}}, Html.span({className: "fakeLink", style: {fontStyle: 'italic', fontWeight: 'normal'}}, "View contribution list"));
+        var detailsLink = Html.div({style: {marginTop: pixels(5), marginLeft: pixels(5)}}, Html.span({className: "fakeLink", style: {fontStyle: 'italic', fontWeight: 'normal'}}, $T("View contribution list")));
         contributionsDiv.append(detailsLink);
 
         detailsLink.observeClick(function (e) {
@@ -904,7 +904,7 @@ type("TimetableBlockPopup", ["BalloonPopup", "TimetableBlockBase"], {
                     contribs.push(value);
                 }
             });
-            var popup = new ContributionsPopup(("Contribution details"),contribs, self.eventData.isPoster, false, function() {self.popupAllowClose = true; return true;}, true);
+            var popup = new ContributionsPopup(($T("Contribution details")),contribs, self.eventData.isPoster, false, function() {self.popupAllowClose = true; return true;}, true);
             popup.open();
         });
 
@@ -932,7 +932,7 @@ type("TimetableBlockPopup", ["BalloonPopup", "TimetableBlockBase"], {
     _getContributionList: function(maxNumContribs, links) {
         var self = this;
 
-        var contributionsDiv = Html.div({className: 'timetablePopupContributions'}, "Contributions");
+        var contributionsDiv = Html.div({className: 'timetablePopupContributions'}, $T("Contributions"));
 
         var contributions = Html.tbody({});
         var contribs = [];
@@ -1235,8 +1235,8 @@ type("TimetableBlockPopupManagement", ["TimetableBlockPopup"],
             this._setInfo();
             this._setParentInfo();
 
-            var roomLocationDiv = Html.div({},Html.div('roomPopupTitle', 'Location: '),
-                    self.eventData.location, Html.br(), Html.div('roomPopupTitle', 'Room: '),
+            var roomLocationDiv = Html.div({},Html.div('roomPopupTitle', $T('Location: ')),
+                    self.eventData.location, Html.br(), Html.div('roomPopupTitle', $T('Room: ')),
                     self.eventData.room, Html.img({src: imageSrc("edit_16")}), Html.br());
 
             this.editRoomLocationFunction = function(e){
@@ -1646,7 +1646,7 @@ type("TimetableDrawer", ["IWidget", "DroppableTimetableMixin"],
                  }
 
                  var nDate = Util.parseJSDateTime(day, IndicoDateTimeFormats.Ordinal);
-                 var dayStr = Indico.Data.WeekDays[nDate.getDay()].substring(0,3)+' '+nDate.getDate()+'/'+(nDate.getMonth()+1);
+                 var dayStr = $T(Indico.Data.WeekDays[nDate.getDay()])+' '+(nDate.getMonth()+1)+'/'+nDate.getDate();
 
                  header = Html.div({className: 'timetableHeader', style: headerStyle}, dayStr);
                  div.append(header);

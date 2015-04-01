@@ -17,11 +17,11 @@ if todayDate  >= startDate and todayDate <= endDate:
     happeningNowClass = "today"
 
 if startDate.year != endDate.year:
-    evtDate = "%s - %s" % (format_date(startDate, "dd MMM yyyy"), format_date(endDate, "dd MMM yyyy"))
+    evtDate = "%s - %s" % (format_date(startDate, "yyyy MMM dd"), format_date(endDate, "yyyy MMM dd"))
 elif (startDate.month != endDate.month) or (startDate.day != endDate.day):
-    evtDate = "%s - %s" % (format_date(startDate, "dd MMM"), format_date(endDate, "dd MMM"))
+    evtDate = "%s - %s" % (format_date(startDate, "MMM dd"), format_date(endDate, "MMM dd"))
 else:
-    evtDate = "%s" % format_date(startDate, "dd MMM")
+    evtDate = "%s" % format_date(startDate, "MMM dd")
 
 eventTitle = escape(remove_tags(lItem.getTitle().strip())) or "[no title]"
 

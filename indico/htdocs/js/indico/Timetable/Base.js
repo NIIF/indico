@@ -443,8 +443,7 @@ type("TopLevelTimeTableMixin", ["JLookupTabWidget"], {
         var delements = parseDate(strDate);
         var nDate = new Date(delements[2], delements[1]-1, delements[0]);
 
-        return Indico.Data.WeekDays[nDate.getDay()].substring(0,3)+' '+day+'/'+month;
-
+        return $T(Indico.Data.WeekDays[nDate.getDay()].substring(0,3))+' '+month+'/'+day;
     },
 
 

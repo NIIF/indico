@@ -67,6 +67,6 @@ class DisplayTimezoneRegistry:
             if title==selTitle:
                 selected=" selected"
             l.append("""<option value=%s%s>%s</option>"""%(quoteattr(title),
-                                        selected, escape(title)))
+                                        selected, _(escape(title))))
         return "".join(l)
     getSelectItemsHTML=classmethod(getSelectItemsHTML)

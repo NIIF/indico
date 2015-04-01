@@ -1,6 +1,6 @@
 <div class="path" style="margin-bottom: 10px">
     <div class="groupTitleNoBorder" style="font-style: italic; font-size: 12pt; margin: 0; padding: 0">
-        ${type}
+        ${_(type)}
     </div>
     <div class="groupTitleNoBorder title" style="color: #B14300; margin: 0; padding: 0">
         ${title}

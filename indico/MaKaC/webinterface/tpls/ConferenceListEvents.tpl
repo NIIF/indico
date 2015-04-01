@@ -20,7 +20,7 @@
                 cls = 'currentMonth'
         %>
         <h4 class="${cls}" id="${'eventList-%d-%d' % (currentYear, currentMonth)}">
-        <span>${ format_date(date(itemStartDate.year, itemStartDate.month, 1), 'MMMM yyyy') }</span></h4>
+        <span>${ format_date(date(itemStartDate.year, itemStartDate.month, 1), 'yyyy MMMM') }</span></h4>
         <ul>
     % endif
     <%include file="ConferenceListItem.tpl" args="aw=aw, lItem=item, conferenceDisplayURLGen=conferenceDisplayURLGen"/>
