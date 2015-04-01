@@ -9,7 +9,7 @@
 </div>
 
 % if isSSOLoginActive:
-<form id="signInSSOForm" action="${ ssoURL }" method="POST">
+<form id="signInSSOForm" action="${ ssoURL }/Shibboleth" method="POST">
     <input id="authId" type="hidden" name="authId" value="">
     % for auth in authenticators:
         % if auth.isSSOLoginActive():

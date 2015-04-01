@@ -1,0 +1,65 @@
+AddDefaultCharset UTF-8
+
+<VirtualHost *:80>
+        # mod_wsgi indico
+
+        RewriteEngine On
+        RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+	ErrorLog /var/log/apache2/error.log
+        LogLevel warn
+	
+	Alias /indico/images "/opt/indico/htdocs/images"
+	Alias /indico/css "/opt/indico/htdocs/css"
+	Alias /indico/js "/opt/indico/htdocs/js"
+	Alias /indico/ihelp "/opt/indico/htdocs/ihelp"
+
+	WSGIDaemonProcess WSGIDAEMON processes=32 threads=1 inactivity-timeout=3600 maximum-requests=10000 \
+            python-eggs=/opt/indico/tmp/egg-cache
+
+	WSGIScriptAlias / "/opt/indico/htdocs/indico.wsgi"
+	
+	<Directory "/opt/indico">
+	    WSGIProcessGroup WSGIDAEMON
+	    WSGIApplicationGroup %{GLOBAL}
+	    AllowOverride None
+	    Options None
+	    Order deny,allow
+	    Allow from all
+	</Directory>
+</VirtualHost>
+
+<VirtualHost *:443>
+
+        <Location /user/login/sso>
+         AuthType shibboleth
+         ShibUseHeaders on
+         ShibRequireSession on
+         require valid-user
+        </Location>
+
+        <Location /Shibboleth.sso>
+          AuthType shibboleth
+          ShibUseHeaders on
+          ShibRequireSession on
+          require valid-user
+        </Location>
+
+	ErrorLog /var/log/apache2/error-ssl.log
+        LogLevel warn
+
+	Alias /indico/images "/opt/indico/htdocs/images"
+	Alias /indico/css "/opt/indico/htdocs/css"
+	Alias /indico/js "/opt/indico/htdocs/js"
+	Alias /indico/ihelp "/opt/indico/htdocs/ihelp"
+
+        Alias /shibboleth-sp/main.css /usr/share/shibboleth/main.css
+        Alias /shibboleth-sp/logo.jpg /usr/share/shibboleth/logo.jpg
+
+        WSGIScriptAlias / "/opt/indico/htdocs/indico.wsgi"
+
+        SSLEngine on
+        SSLCertificateFile    /etc/ssl/certs/ssl-cert-conference.test.portal.hu.pem
+	SSLCertificateKeyFile /etc/ssl/private/ssl-cert-conference.test.portal.hu.key
+        SSLCertificateChainFile /etc/ssl/chain/chain-conference.test.portal.hu.pem
+</VirtualHost>
